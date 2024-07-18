@@ -1,30 +1,37 @@
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using UnityEngine;
 
 namespace RPSOnline
 {
     public class Player : NetworkBehaviour
     {
+        public event System.Action<RockPaperScissors> OnGuessChanged;
         public event System.Action<byte> OnPlayerNumberChanged;
 
         static readonly List<Player> playersList = new List<Player>();
 
         [Header("Player UI")]
-        public PlayerUI playerUIPrefab;
-
-        GameObject playerUIObject;
-        PlayerUI playerUI = null;
+        [SerializeField] PlayerUI playerUI = null;
 
         [Header("SyncVars")]
 
         [SyncVar(hook = nameof(PlayerNumberChanged))]
         public byte playerNumber = 0;
 
+        [SyncVar(hook = nameof(GuessChanged))]
+        public RockPaperScissors guess;
+
         void PlayerNumberChanged(byte _, byte newPlayerNumber)
         {
             OnPlayerNumberChanged?.Invoke(newPlayerNumber);
+        }
+
+        void GuessChanged(RockPaperScissors _, RockPaperScissors newGuess)
+        {
+            OnGuessChanged?.Invoke(newGuess);
         }
 
         #region Server
@@ -54,7 +61,7 @@ namespace RPSOnline
         [ServerCallback]
         internal static void SetPlayerNumbers()
         {
-            byte playerNumber = 0;
+            byte playerNumber = 1;
             foreach (Player player in playersList)
                 player.playerNumber = playerNumber++;
         }
@@ -67,13 +74,12 @@ namespace RPSOnline
         /// </summary>
         public override void OnStartClient()
         {
-            playerUIObject = Instantiate(playerUIPrefab).gameObject;
-            playerUI = playerUIObject.GetComponent<PlayerUI>();
-
             // wire up all events to handlers in PlayerUI
             OnPlayerNumberChanged = playerUI.OnPlayerNumberChanged;
+            OnGuessChanged = playerUI.OnGuessChanged;
 
             // Invoke all event handlers with the initial data from spawn payload
+            OnGuessChanged.Invoke(RockPaperScissors.None);
             OnPlayerNumberChanged.Invoke(playerNumber);
         }
 
@@ -102,8 +108,7 @@ namespace RPSOnline
         public override void OnStopClient()
         {
             OnPlayerNumberChanged = null;
-
-            Destroy(playerUIObject);
+            OnGuessChanged = null;
         }
         #endregion
     }
