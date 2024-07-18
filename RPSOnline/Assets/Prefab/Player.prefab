@@ -49,7 +49,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  playerUIPrefab: {fileID: 8581138126935878036, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
   playerUI: {fileID: 1026264571004787313}
   playerNumber: 0
   guess: 0
@@ -78,9 +77,145 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6106282636329536594}
     m_Modifications:
+    - target: {fileID: 350061344981716061, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2574120936283366636}
+    - target: {fileID: 350061344981716061, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GuessScissors
+      objectReference: {fileID: 0}
+    - target: {fileID: 350061344981716061, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RPSOnline.Player, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 350061344981716061, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163629718589664007, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163629718589664007, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163629718589664007, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163629718589664007, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402413532817250696, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402413532817250696, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402413532817250696, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402413532817250696, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402413532817250696, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402413532817250696, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330669612622894475, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2574120936283366636}
+    - target: {fileID: 3330669612622894475, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GuessRock
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330669612622894475, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RPSOnline.Player, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330669612622894475, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181828540163130356, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181828540163130356, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181828540163130356, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181828540163130356, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211489800301815696, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211489800301815696, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211489800301815696, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211489800301815696, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211489800301815696, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211489800301815696, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5587060059623978856, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
       propertyPath: m_Name
       value: PlayerUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111657638452526662, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111657638452526662, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111657638452526662, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111657638452526662, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111657638452526662, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111657638452526662, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7225995519952623959, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -121,6 +256,22 @@ PrefabInstance:
     - target: {fileID: 7225995519952623959, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916856239539974725, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2574120936283366636}
+    - target: {fileID: 7916856239539974725, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GuessPaper
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916856239539974725, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RPSOnline.Player, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916856239539974725, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

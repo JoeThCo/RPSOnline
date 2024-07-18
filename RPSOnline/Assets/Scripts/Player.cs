@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace RPSOnline
 {
@@ -45,7 +46,6 @@ namespace RPSOnline
             base.OnStartServer();
 
             playersList.Add(this);
-
         }
 
         /// <summary>
@@ -65,6 +65,7 @@ namespace RPSOnline
             foreach (Player player in playersList)
                 player.playerNumber = playerNumber++;
         }
+
         #endregion
 
         #region Client
@@ -109,6 +110,24 @@ namespace RPSOnline
         {
             OnPlayerNumberChanged = null;
             OnGuessChanged = null;
+        }
+
+        [Command(requiresAuthority = true)]
+        public void GuessRock()
+        {
+            guess = RockPaperScissors.Rock;
+        }
+
+        [Command(requiresAuthority = true)]
+        public void GuessPaper()
+        {
+            guess = RockPaperScissors.Paper;
+        }
+
+        [Command(requiresAuthority = true)]
+        public void GuessScissors()
+        {
+            guess = RockPaperScissors.Scissors;
         }
         #endregion
     }
