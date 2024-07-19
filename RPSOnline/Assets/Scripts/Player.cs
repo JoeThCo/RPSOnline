@@ -82,6 +82,15 @@ namespace RPSOnline
             // Invoke all event handlers with the initial data from spawn payload
             OnGuessChanged.Invoke(RockPaperScissors.None);
             OnPlayerNumberChanged.Invoke(playerNumber);
+
+            if (!isLocalPlayer)
+            {
+                playerUI.OnNotLocalPlayer();
+            }
+            else
+            {
+                playerUI.ResetUI();
+            }
         }
 
         /// <summary>
@@ -112,19 +121,19 @@ namespace RPSOnline
             OnGuessChanged = null;
         }
 
-        [Command(requiresAuthority = true)]
+        [Command]
         public void GuessRock()
         {
             guess = RockPaperScissors.Rock;
         }
 
-        [Command(requiresAuthority = true)]
+        [Command]
         public void GuessPaper()
         {
             guess = RockPaperScissors.Paper;
         }
 
-        [Command(requiresAuthority = true)]
+        [Command]
         public void GuessScissors()
         {
             guess = RockPaperScissors.Scissors;

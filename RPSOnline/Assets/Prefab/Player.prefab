@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2121108813045754546}
+  - {fileID: 3227288627700320178}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2574120936283366636
@@ -49,7 +49,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  playerUI: {fileID: 1026264571004787313}
+  playerUI: {fileID: 4582437784567527281}
   playerNumber: 0
   guess: 0
 --- !u!114 &5362332664189447270
@@ -69,7 +69,7 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
---- !u!1001 &8730321996511835109
+--- !u!1001 &5228192408045051621
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -278,10 +278,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
---- !u!114 &1026264571004787313 stripped
+--- !u!4 &3227288627700320178 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7225995519952623959, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+  m_PrefabInstance: {fileID: 5228192408045051621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4582437784567527281 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8581138126935878036, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
-  m_PrefabInstance: {fileID: 8730321996511835109}
+  m_PrefabInstance: {fileID: 5228192408045051621}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -289,8 +294,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7789321f147c374409e12a97f8f76030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2121108813045754546 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7225995519952623959, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
-  m_PrefabInstance: {fileID: 8730321996511835109}
-  m_PrefabAsset: {fileID: 0}
