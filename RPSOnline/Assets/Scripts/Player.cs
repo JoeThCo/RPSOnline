@@ -5,16 +5,15 @@ using System.Dynamic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Playables;
+using System;
 
 namespace RPSOnline
 {
     public class Player : NetworkBehaviour
     {
-        public event System.Action<RockPaperScissors> OnGuessChanged;
-        public event System.Action<byte> OnPlayerNumberChanged;
-        public event System.Action<bool> OnLockedInChanged;
-
-        static readonly List<Player> playersList = new List<Player>();
+        public event Action<RockPaperScissors> OnGuessChanged;
+        public event Action<byte> OnPlayerNumberChanged;
+        public event Action<bool> OnLockedInChanged;
 
         [Header("Player UI")]
         [SerializeField] PlayerUI playerUI = null;
@@ -54,7 +53,7 @@ namespace RPSOnline
         public override void OnStartServer()
         {
             base.OnStartServer();
-            playersList.Add(this);
+            GameManager.AddPlayer(this);
         }
 
         /// <summary>
@@ -64,15 +63,7 @@ namespace RPSOnline
         public override void OnStopServer()
         {
             base.OnStopServer();
-            playersList.Remove(this);
-        }
-
-        [ServerCallback]
-        internal static void SetPlayerNumbers()
-        {
-            byte playerNumber = 1;
-            foreach (Player player in playersList)
-                player.playerNumber = playerNumber++;
+            GameManager.RemovePlayer(this);
         }
 
         #endregion
@@ -138,6 +129,7 @@ namespace RPSOnline
         public void LockedInButtonPressed()
         {
             isLockedIn = true;
+            GameManager.PlayerLockedIn();
         }
 
         [Command]
