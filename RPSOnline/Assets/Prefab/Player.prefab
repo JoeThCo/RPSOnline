@@ -52,6 +52,7 @@ MonoBehaviour:
   playerUI: {fileID: 4582437784567527281}
   playerNumber: 0
   guess: 0
+  isLockedIn: 0
 --- !u!114 &5362332664189447270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,6 +257,18 @@ PrefabInstance:
     - target: {fileID: 7225995519952623959, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840786405575817894, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2574120936283366636}
+    - target: {fileID: 7840786405575817894, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LockedInButtonPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840786405575817894, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RPSOnline.Player, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7916856239539974725, guid: 258ab0fb176d99549ac2bcb978925fbb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

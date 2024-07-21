@@ -2,6 +2,7 @@ using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -11,6 +12,7 @@ namespace RPSOnline
     {
         public event System.Action<RockPaperScissors> OnGuessChanged;
         public event System.Action<byte> OnPlayerNumberChanged;
+        public event System.Action<bool> OnLockedInChanged;
 
         static readonly List<Player> playersList = new List<Player>();
 
@@ -25,6 +27,9 @@ namespace RPSOnline
         [SyncVar(hook = nameof(GuessChanged))]
         public RockPaperScissors guess;
 
+        [SyncVar(hook = nameof(LockedInChanged))]
+        public bool isLockedIn = false;
+
         void PlayerNumberChanged(byte _, byte newPlayerNumber)
         {
             OnPlayerNumberChanged?.Invoke(newPlayerNumber);
@@ -33,6 +38,11 @@ namespace RPSOnline
         void GuessChanged(RockPaperScissors _, RockPaperScissors newGuess)
         {
             OnGuessChanged?.Invoke(newGuess);
+        }
+
+        void LockedInChanged(bool _, bool newState)
+        {
+            OnLockedInChanged?.Invoke(newState);
         }
 
         #region Server
@@ -44,7 +54,6 @@ namespace RPSOnline
         public override void OnStartServer()
         {
             base.OnStartServer();
-
             playersList.Add(this);
         }
 
@@ -78,18 +87,21 @@ namespace RPSOnline
             // wire up all events to handlers in PlayerUI
             OnPlayerNumberChanged = playerUI.OnPlayerNumberChanged;
             OnGuessChanged = playerUI.OnGuessChanged;
+            OnLockedInChanged = playerUI.OnLockedChanged;
 
             // Invoke all event handlers with the initial data from spawn payload
             OnGuessChanged.Invoke(RockPaperScissors.None);
             OnPlayerNumberChanged.Invoke(playerNumber);
+            OnLockedInChanged.Invoke(false);
 
+            //the local UI is disabled, the locked in text does sync!
             if (!isLocalPlayer)
             {
                 playerUI.OnNotLocalPlayer();
             }
             else
             {
-                playerUI.ResetUI();
+                playerUI.OnLocalPlayer();
             }
         }
 
@@ -119,6 +131,13 @@ namespace RPSOnline
         {
             OnPlayerNumberChanged = null;
             OnGuessChanged = null;
+            OnLockedInChanged = null;
+        }
+
+        [Command]
+        public void LockedInButtonPressed()
+        {
+            isLockedIn = true;
         }
 
         [Command]

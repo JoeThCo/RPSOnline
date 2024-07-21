@@ -9,29 +9,37 @@ namespace RPSOnline
     public class PlayerUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI playerNameText;
-        [SerializeField] private TextMeshProUGUI guessText;
         [Space(10)]
-        [SerializeField] private RectTransform localUI;
-        [SerializeField] private RectTransform forGuessing;
-        [SerializeField] private RectTransform postGuess;
-        [SerializeField] private RectTransform displayAllTheTime;
+        [SerializeField] private TextMeshProUGUI guessText;
+        [SerializeField] private RectTransform guessButtons;
+        [Space(10)]
+        [SerializeField] private RectTransform lockedInText;
+        [SerializeField] private RectTransform lockedInButton;
 
         public void OnNotLocalPlayer()
         {
-            localUI.gameObject.SetActive(false);
-            displayAllTheTime.gameObject.SetActive(false);
+            guessText.gameObject.SetActive(false);
+            guessButtons.gameObject.SetActive(false);
+            lockedInButton.gameObject.SetActive(false);
+
+            lockedInText.gameObject.SetActive(false);
         }
 
-        public void ResetUI() 
+        public void OnLocalPlayer()
         {
-            forGuessing.gameObject.SetActive(true);
-            postGuess.gameObject.SetActive(false);
+            guessText.gameObject.SetActive(true);
+            guessButtons.gameObject.SetActive(true);
+            lockedInButton.gameObject.SetActive(true);
+
+            lockedInText.gameObject.SetActive(false);
         }
 
-        public void OnLockedIn()
+        public void OnLockedChanged(bool newState)
         {
-            forGuessing.gameObject.SetActive(false);
-            postGuess.gameObject.SetActive(true);
+            guessButtons.gameObject.SetActive(false);
+            lockedInButton.gameObject.SetActive(false);
+
+            lockedInText.gameObject.SetActive(newState);
         }
 
         public void OnPlayerNumberChanged(byte newPlayerNumber)
