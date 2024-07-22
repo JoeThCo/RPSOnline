@@ -11,13 +11,18 @@ namespace RPSOnline
     public class GameManager : NetworkBehaviour
     {
         public event Action OnAllLockedIn;
+        public event Action OnEnoughPlayers;
 
         static readonly List<Player> playerList = new List<Player>();
 
         [SyncVar(hook = nameof(AllLockedIn))]
-        public bool isAllPlayersLockedIn = false;
+        public bool IsAllPlayersLockedIn = false;
+
+        [SyncVar(hook = nameof(EnoughPlayersJoined))]
+        public bool IsEnoughPlayers = false;
 
         public static GameManager Instance;
+        private const int MAX_PLAYERS = 2;
 
         private void Awake()
         {
@@ -36,7 +41,6 @@ namespace RPSOnline
         }
 
         #region Player Setup
-
         [ServerCallback]
         internal void SetPlayerNumbers()
         {
@@ -48,13 +52,20 @@ namespace RPSOnline
         internal void AddPlayer(Player player)
         {
             playerList.Add(player);
+            IsEnoughPlayers = playerList.Count == MAX_PLAYERS;
         }
 
         internal void RemovePlayer(Player player)
         {
             playerList.Remove(player);
+            IsEnoughPlayers = playerList.Count == MAX_PLAYERS;
         }
         #endregion
+
+        void EnoughPlayersJoined(bool _, bool newState)
+        {
+            OnEnoughPlayers?.Invoke();
+        }
 
         void AllLockedIn(bool _, bool newState)
         {
@@ -63,13 +74,12 @@ namespace RPSOnline
 
         public void OnLockedInChanged(bool newState)
         {
-            isAllPlayersLockedIn = IsAllLockedIn();
+            IsAllPlayersLockedIn = IsAllLockedIn();
         }
 
         void AllLockedInChanged()
         {
             Player player = GetWinner(playerList[0], playerList[1]);
-            Debug.Log(player == null);
 
             if (player != null)
             {

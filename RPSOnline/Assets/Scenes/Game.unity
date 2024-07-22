@@ -474,6 +474,7 @@ GameObject:
   - component: {fileID: 1728523621}
   - component: {fileID: 1728523620}
   - component: {fileID: 1728523619}
+  - component: {fileID: 1728523623}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -564,6 +565,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1728523623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728523618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8c14774beb0be4595423a8a4299513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitingText: {fileID: 2082131312}
 --- !u!1 &1975599991
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,6 +644,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  IsAllPlayersLockedIn: 0
+  IsEnoughPlayers: 0
 --- !u!1 &2082131310
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +658,7 @@ GameObject:
   - component: {fileID: 2082131313}
   - component: {fileID: 2082131312}
   m_Layer: 5
-  m_Name: Starting soon...
+  m_Name: Waiting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -826,8 +842,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 1104140500}
-  - {fileID: 457544065}
   - {fileID: 6612661935345523950}
   - {fileID: 479321304}
+  - {fileID: 457544065}
   - {fileID: 1975599992}
+  - {fileID: 1104140500}
