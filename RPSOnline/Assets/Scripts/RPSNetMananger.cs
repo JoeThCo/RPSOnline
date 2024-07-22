@@ -10,14 +10,14 @@ namespace RPSOnline
         public override void OnServerAddPlayer(NetworkConnectionToClient conn)
         {
             base.OnServerAddPlayer(conn);
-            GameManager.SetPlayerNumbers();
+            GameManager.Instance.SetPlayerNumbers();
             Debug.Log("Player Added!");
         }
 
         public override void OnServerDisconnect(NetworkConnectionToClient conn)
         {
             base.OnServerDisconnect(conn);
-            GameManager.SetPlayerNumbers();
+            GameManager.Instance.SetPlayerNumbers();
             Debug.Log("Player Left!");
         }
     }

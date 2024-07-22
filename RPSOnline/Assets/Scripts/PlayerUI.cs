@@ -9,6 +9,7 @@ namespace RPSOnline
     public class PlayerUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI playerNameText;
+        [SerializeField] private TextMeshProUGUI roundWinsText;
         [Space(10)]
         [SerializeField] private TextMeshProUGUI guessText;
         [SerializeField] private RectTransform guessButtons;
@@ -16,7 +17,21 @@ namespace RPSOnline
         [SerializeField] private RectTransform lockedInText;
         [SerializeField] private RectTransform lockedInButton;
 
-        public void OnNotLocalPlayer()
+        public bool isLocalPlayer = false;
+
+        public void DisplayUI()
+        {
+            if (isLocalPlayer)
+            {
+                OnLocalPlayer();
+            }
+            else
+            {
+                OnNotLocalPlayer();
+            }
+        }
+
+        void OnNotLocalPlayer()
         {
             guessText.gameObject.SetActive(false);
             guessButtons.gameObject.SetActive(false);
@@ -25,7 +40,7 @@ namespace RPSOnline
             lockedInText.gameObject.SetActive(false);
         }
 
-        public void OnLocalPlayer()
+        void OnLocalPlayer()
         {
             guessText.gameObject.SetActive(true);
             guessButtons.gameObject.SetActive(true);
@@ -50,6 +65,11 @@ namespace RPSOnline
         public void OnGuessChanged(RockPaperScissors newGuess)
         {
             guessText.SetText(newGuess.ToString());
+        }
+
+        public void OnRoundWon(byte roundWins)
+        {
+            roundWinsText.SetText($"W: {roundWins}");
         }
     }
 }

@@ -14,6 +14,7 @@ namespace RPSOnline
         public event Action<RockPaperScissors> OnGuessChanged;
         public event Action<byte> OnPlayerNumberChanged;
         public event Action<bool> OnLockedInChanged;
+        public event Action<byte> OnRoundWon;
 
         [Header("Player UI")]
         [SerializeField] PlayerUI playerUI = null;
@@ -21,14 +22,18 @@ namespace RPSOnline
         [Header("SyncVars")]
 
         [SyncVar(hook = nameof(PlayerNumberChanged))]
-        public byte playerNumber = 0;
+        public byte PlayerNumber = 0;
 
         [SyncVar(hook = nameof(GuessChanged))]
-        public RockPaperScissors guess;
+        public RockPaperScissors Guess;
 
         [SyncVar(hook = nameof(LockedInChanged))]
-        public bool isLockedIn = false;
+        public bool IsLockedIn = false;
 
+        [SyncVar(hook = nameof(RoundWinsChanged))]
+        private byte RoundWins = 0;
+
+        #region Actions
         void PlayerNumberChanged(byte _, byte newPlayerNumber)
         {
             OnPlayerNumberChanged?.Invoke(newPlayerNumber);
@@ -44,6 +49,12 @@ namespace RPSOnline
             OnLockedInChanged?.Invoke(newState);
         }
 
+        void RoundWinsChanged(byte _, byte newWins)
+        {
+            OnRoundWon?.Invoke(newWins);
+        }
+        #endregion
+
         #region Server
         /// <summary>
         /// This is invoked for NetworkBehaviour objects when they become active on the server.
@@ -53,7 +64,7 @@ namespace RPSOnline
         public override void OnStartServer()
         {
             base.OnStartServer();
-            GameManager.AddPlayer(this);
+            GameManager.Instance.AddPlayer(this);
         }
 
         /// <summary>
@@ -63,7 +74,7 @@ namespace RPSOnline
         public override void OnStopServer()
         {
             base.OnStopServer();
-            GameManager.RemovePlayer(this);
+            GameManager.Instance.RemovePlayer(this);
         }
 
         #endregion
@@ -76,42 +87,26 @@ namespace RPSOnline
         public override void OnStartClient()
         {
             // wire up all events to handlers in PlayerUI
-            OnPlayerNumberChanged = playerUI.OnPlayerNumberChanged;
-            OnGuessChanged = playerUI.OnGuessChanged;
-            OnLockedInChanged = playerUI.OnLockedChanged;
+            OnPlayerNumberChanged += playerUI.OnPlayerNumberChanged;
+            OnGuessChanged += playerUI.OnGuessChanged;
+            OnRoundWon += playerUI.OnRoundWon;
+
+            OnLockedInChanged += PlayerOnLockedInChanged;
 
             // Invoke all event handlers with the initial data from spawn payload
             OnGuessChanged.Invoke(RockPaperScissors.None);
-            OnPlayerNumberChanged.Invoke(playerNumber);
+            OnPlayerNumberChanged.Invoke(PlayerNumber);
             OnLockedInChanged.Invoke(false);
+            OnRoundWon.Invoke(0);
+            playerUI.isLocalPlayer = isLocalPlayer;
 
-            //the local UI is disabled, the locked in text does sync!
-            if (!isLocalPlayer)
-            {
-                playerUI.OnNotLocalPlayer();
-            }
-            else
-            {
-                playerUI.OnLocalPlayer();
-            }
+            playerUI.DisplayUI();
         }
 
-        /// <summary>
-        /// Called when the local player object has been set up.
-        /// <para>This happens after OnStartClient(), as it is triggered by an ownership message from the server. This is an appropriate place to activate components or functionality that should only be active for the local player, such as cameras and input.</para>
-        /// </summary>
-        public override void OnStartLocalPlayer()
+        void PlayerOnLockedInChanged(bool newState)
         {
-            base.OnStartLocalPlayer();
-        }
-
-        /// <summary>
-        /// Called when the local player object is being stopped.
-        /// <para>This happens before OnStopClient(), as it may be triggered by an ownership message from the server, or because the player object is being destroyed. This is an appropriate place to deactivate components or functionality that should only be active for the local player, such as cameras and input.</para>
-        /// </summary>
-        public override void OnStopLocalPlayer()
-        {
-            base.OnStopLocalPlayer();
+            GameManager.Instance.OnLockedInChanged(newState);
+            playerUI.OnLockedChanged(newState);
         }
 
         /// <summary>
@@ -123,32 +118,39 @@ namespace RPSOnline
             OnPlayerNumberChanged = null;
             OnGuessChanged = null;
             OnLockedInChanged = null;
+            OnRoundWon = null;
+        }
+        #endregion
+
+        [ServerCallback]
+        public void RoundWon()
+        {
+            Debug.Log($"Round Won for {gameObject.name}");
+            RoundWins++;
         }
 
         [Command]
         public void LockedInButtonPressed()
         {
-            isLockedIn = true;
-            GameManager.PlayerLockedIn();
+            IsLockedIn = true;
         }
 
         [Command]
         public void GuessRock()
         {
-            guess = RockPaperScissors.Rock;
+            Guess = RockPaperScissors.Rock;
         }
 
         [Command]
         public void GuessPaper()
         {
-            guess = RockPaperScissors.Paper;
+            Guess = RockPaperScissors.Paper;
         }
 
         [Command]
         public void GuessScissors()
         {
-            guess = RockPaperScissors.Scissors;
+            Guess = RockPaperScissors.Scissors;
         }
-        #endregion
     }
 }
